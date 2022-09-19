@@ -144,7 +144,7 @@ const search = (type: "region" | "country" | "all", text: String) => {
   }
 };
 
-const checkedFilter = (selected: Object) => {
+const checkedFilter = (selected: any) => {
   if (!selectedFilter.value.includes(selected)) {
     selectedFilter.value.push(selected);
   } else {
@@ -153,7 +153,7 @@ const checkedFilter = (selected: Object) => {
   }
 };
 
-const actionFilter = (selected: Object, type: "remove" | "excluded") => {
+const actionFilter = (selected: any, type: "remove" | "excluded") => {
   let index = selectedFilter.value.indexOf(selected);
 
   if (type == "remove") {
@@ -166,11 +166,11 @@ const actionFilter = (selected: Object, type: "remove" | "excluded") => {
   }
 };
 
-const setRange = (year: Number, type) => {
+const setRange = (year: Number | String, type: "from" | "to") => {
   if (year == "") return;
 
   let hasRange = false;
-  selectedFilter.value.map((data) => {
+  selectedFilter.value.map((data: any) => {
     hasRange = data.hasOwnProperty("isRange");
   });
 
@@ -182,7 +182,7 @@ const setRange = (year: Number, type) => {
     });
   }
 
-  selectedFilter.value.filter((obj) => {
+  selectedFilter.value.filter((obj: any) => {
     if (obj.isRange) {
       if (type == "from") {
         obj.from = year;

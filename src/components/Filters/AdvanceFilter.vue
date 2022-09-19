@@ -29,21 +29,21 @@ const props = defineProps({
   },
 });
 
-const selectResult = (selected: Object) => {
+const selectResult = (selected: any) => {
   emit("selectSearch", selected, "all");
   search_key.value = "";
 };
 
-const checkedFilter = (selected: Object) => {
+const checkedFilter = (selected: any) => {
   selected.selected = !selected.selected;
   emit("checkedFilterCB", selected);
 };
 
-const excludeSelected = (selected: Object) => {
+const excludeSelected = (selected: any) => {
   emit("actionFilterCB", selected, "excluded");
 };
 
-const removeSelected = (selected: Object) => {
+const removeSelected = (selected: any) => {
   selected.selected = !selected.selected;
   emit("actionFilterCB", selected, "remove");
 
@@ -58,11 +58,11 @@ const setRange = (year: Number, type: "from" | "to") => {
 };
 
 const clearAll = () => {
-  sizes.value.map((obj) => {
+  sizes.value.map((obj: any) => {
     obj.selected = false;
   });
 
-  stages.value.map((obj) => {
+  stages.value.map((obj: any) => {
     obj.selected = false;
   });
   from.value = "";
