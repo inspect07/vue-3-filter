@@ -54,7 +54,7 @@ watch(
   <div class="basic-filter">
     <div class="menu-title">
       <span>Country</span>
-      <span>Icon</span>
+      <span class="icon"><font-awesome-icon icon="filter" /></span>
     </div>
     <div class="search">
       <input type="text" placeholder="Type to Search" v-model="country_key" />
@@ -83,7 +83,7 @@ watch(
     </div>
     <div class="menu-title">
       <span>Region</span>
-      <span>Icon</span>
+      <span class="icon"><font-awesome-icon icon="filter" /></span>
     </div>
     <div class="search">
       <input type="text" placeholder="Type to Search" v-model="region_key" />
@@ -131,6 +131,10 @@ watch(
     font-size: 0.9375rem;
 
     padding: 0.3rem 0.75rem;
+
+    .icon {
+      color: var(--theme-color);
+    }
   }
 
   .search {
