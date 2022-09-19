@@ -70,17 +70,25 @@ const clearAll = () => {
   emit("clearAllCB");
 };
 
+const onlyNumberKey = (evt) => {
+  let ASCIICode = evt.which ? evt.which : evt.keyCode;
+  if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
+    evt.preventDefault();
+  }
+  return true;
+};
+
 onMounted(() => {
   sizes.value = [
-    { from: 1, to: 10, selected: false },
-    { from: 11, to: 50, selected: false },
-    { from: 51, to: 100, selected: false },
-    { from: 101, to: 200, selected: false },
-    { from: 201, to: 500, selected: false },
-    { from: 501, to: 1000, selected: false },
-    { from: 1001, to: 5000, selected: false },
-    { from: 5001, to: 10000, selected: false },
-    { from: 10001, to: "", selected: false },
+    { from: 1, to: 10, selected: false, size: true },
+    { from: 11, to: 50, selected: false, size: true },
+    { from: 51, to: 100, selected: false, size: true },
+    { from: 101, to: 200, selected: false, size: true },
+    { from: 201, to: 500, selected: false, size: true },
+    { from: 501, to: 1000, selected: false, size: true },
+    { from: 1001, to: 5000, selected: false, size: true },
+    { from: 5001, to: 10000, selected: false, size: true },
+    { from: 10001, to: "", selected: false, size: true },
   ];
 
   stages.value = [
@@ -141,9 +149,21 @@ watch(
         </div>
         <div class="title mt-30">Founded Year</div>
         <div class="date-range">
-          <input type="number" placeholder="2019" v-model="from" max="4" />
+          <input
+            type="text"
+            placeholder="2019"
+            v-model="from"
+            maxlength="4"
+            @keypress="onlyNumberKey($event)"
+          />
           <span>To</span>
-          <input type="number" placeholder="2022" v-model="to" maxlength="4" />
+          <input
+            type="text"
+            placeholder="2022"
+            v-model="to"
+            maxlength="4"
+            @keypress="onlyNumberKey($event)"
+          />
         </div>
         <div class="title mt-30">Size</div>
         <div class="sizes">
@@ -188,16 +208,37 @@ watch(
             :class="`${filter.exclude ? 'excluded' : ''}`"
           >
             <span v-if="filter.name">&nbsp;{{ filter.name }}&nbsp;</span>
-            <span v-if="filter.from !== '' && filter.to == ''"
-              >&nbsp;From {{ filter.from }}&nbsp;</span
-            >
-            <span v-if="filter.to !== '' && filter.from == ''"
-              >&nbsp;to {{ filter.to }}&nbsp;</span
-            >
-            <span v-if="filter.to !== '' && filter.from !== ''"
+
+            <span v-if="filter.to !== '' && filter.from !== '' && filter.size"
               >&nbsp;{{ filter.from }} to {{ filter.to }}&nbsp;</span
             >
             <span v-if="filter.stage">&nbsp;{{ filter.stage }}&nbsp;</span>
+
+            <span
+              v-if="
+                filter.year_from !== '' &&
+                filter.year_to == '' &&
+                filter.isRange
+              "
+              >&nbsp;From {{ filter.year_from }}&nbsp;</span
+            >
+            <span
+              v-if="
+                filter.year_to !== '' &&
+                filter.year_from == '' &&
+                filter.isRange
+              "
+              >&nbsp;to {{ filter.year_to }}&nbsp;</span
+            >
+
+            <span
+              v-if="
+                filter.year_to !== '' &&
+                filter.year_from !== '' &&
+                filter.isRange
+              "
+              >&nbsp;{{ filter.year_from }} to {{ filter.year_to }}&nbsp;</span
+            >
             <div class="action remove" @click="removeSelected(filter)">
               &#x2715;
             </div>
@@ -336,7 +377,7 @@ watch(
       display: flex;
       align-items: center;
 
-      input[type="number"] {
+      input[type="text"] {
         height: 2rem;
         border-radius: 2rem;
         padding-left: 1rem;

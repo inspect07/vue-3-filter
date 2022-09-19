@@ -151,6 +151,8 @@ const checkedFilter = (selected: any) => {
     let index = selectedFilter.value.indexOf(selected);
     selectedFilter.value.splice(index, 1);
   }
+
+  console.log(selectedFilter.value);
 };
 
 const actionFilter = (selected: any, type: "remove" | "excluded") => {
@@ -177,18 +179,18 @@ const setRange = (year: Number | String, type: "from" | "to") => {
   if (!hasRange) {
     selectedFilter.value.push({
       isRange: true,
-      from: "",
-      to: "",
+      year_from: "",
+      year_to: "",
     });
   }
 
   selectedFilter.value.filter((obj: any) => {
     if (obj.isRange) {
       if (type == "from") {
-        obj.from = year;
+        obj.year_from = year;
       }
       if (type == "to") {
-        obj.to = year;
+        obj.year_to = year;
       }
     }
   });
