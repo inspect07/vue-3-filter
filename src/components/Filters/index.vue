@@ -107,7 +107,7 @@ const sortSelected = (type: "region" | "country") => {
   }
 };
 
-const search = (type: "region" | "country" | "all", text: String) => {
+const search = (type: "region" | "country" | "all", text: string) => {
   if (text == "") {
     searchCountryResult.value = [];
     searchRegionResult.value = [];
@@ -168,7 +168,7 @@ const actionFilter = (selected: any, type: "remove" | "excluded") => {
   }
 };
 
-const setRange = (year: Number | String, type: "from" | "to") => {
+const setRange = (year: number | string, type: "from" | "to") => {
   if (year == "") return;
 
   let hasRange = false;
