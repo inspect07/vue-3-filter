@@ -2,6 +2,12 @@
 import { defineProps } from "vue";
 import { ref, watch, defineEmits } from "@vue/runtime-dom";
 
+interface defineData {
+  name: String;
+  selected: Boolean;
+  id: any;
+}
+
 const country_key = ref("");
 const region_key = ref("");
 const emit = defineEmits(["searchCB", "selectCountryCB", "selectRegionCB"]);
@@ -25,12 +31,12 @@ const props = defineProps({
   },
 });
 
-const selectCountry = (country: Object) => {
+const selectCountry = (country: defineData) => {
   emit("selectCountryCB", country, "country");
   country_key.value = "";
 };
 
-const selectRegion = (region: Object) => {
+const selectRegion = (region: defineData) => {
   emit("selectRegionCB", region, "region");
   region_key.value = "";
 };

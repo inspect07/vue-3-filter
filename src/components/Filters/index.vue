@@ -6,7 +6,7 @@ import Countries from "../../assets/countries.json";
 import Regions from "../../assets/regions.json";
 import { onClickOutside } from "@vueuse/core";
 
-interface PropsData {
+interface defineData {
   name: String;
   selected: Boolean;
   id: any;
@@ -59,7 +59,7 @@ const limitRegions = computed(() => {
 });
 
 const selectSearch = (
-  selected: PropsData,
+  selected: defineData,
   type: "region" | "country" | "all"
 ) => {
   if (type == "country") {
