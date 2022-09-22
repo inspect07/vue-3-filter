@@ -53,7 +53,7 @@ const removeSelected = (selected: any) => {
   }
 };
 
-const setRange = (year: Number, type: "from" | "to") => {
+const setRange = (year: number | string, type: "from" | "to") => {
   emit("setRangeCB", year, type);
 };
 
@@ -70,7 +70,7 @@ const clearAll = () => {
   emit("clearAllCB");
 };
 
-const onlyNumberKey = (evt) => {
+const onlyNumberKey = (evt: any) => {
   let ASCIICode = evt.which ? evt.which : evt.keyCode;
   if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
     evt.preventDefault();
@@ -212,6 +212,11 @@ watch(
             <span v-if="filter.to !== '' && filter.from !== '' && filter.size"
               >&nbsp;{{ filter.from }} to {{ filter.to }}&nbsp;</span
             >
+
+            <span v-if="filter.to == '' && filter.from !== '' && filter.size"
+              >&nbsp;{{ filter.from }}+&nbsp;</span
+            >
+
             <span v-if="filter.stage">&nbsp;{{ filter.stage }}&nbsp;</span>
 
             <span

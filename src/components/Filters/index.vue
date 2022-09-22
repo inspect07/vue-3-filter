@@ -86,10 +86,10 @@ const selectSearch = (
 };
 
 const counter = () => {
-  let country = countries.value.filter((c) => {
+  let country = countries.value.filter((c: defineData) => {
     return c.selected == true;
   });
-  let region = regions.value.filter((c) => {
+  let region = regions.value.filter((c: defineData) => {
     return c.selected == true;
   });
   count.value = country.length + region.length;
@@ -98,11 +98,11 @@ const counter = () => {
 const sortSelected = (type: "region" | "country") => {
   if (type == "country") {
     countries.value = countries.value.sort(
-      (a, b) => Number(b.selected) - Number(a.selected)
+      (a: any, b: any) => Number(b.selected) - Number(a.selected)
     );
   } else {
     regions.value = regions.value.sort(
-      (a, b) => Number(b.selected) - Number(a.selected)
+      (a: any, b: any) => Number(b.selected) - Number(a.selected)
     );
   }
 };
@@ -117,7 +117,7 @@ const search = (type: "region" | "country" | "all", text: string) => {
 
   let result: any = [];
   if (type == "country") {
-    countries.value.map((data) => {
+    countries.value.map((data: defineData) => {
       if (data.name.toLowerCase().includes(text.toLowerCase())) {
         result.push(data);
       }
@@ -126,7 +126,7 @@ const search = (type: "region" | "country" | "all", text: string) => {
   }
 
   if (type == "region") {
-    regions.value.map((data) => {
+    regions.value.map((data: defineData) => {
       if (data.name.toLowerCase().includes(text.toLowerCase())) {
         result.push(data);
       }
@@ -135,7 +135,7 @@ const search = (type: "region" | "country" | "all", text: string) => {
   }
 
   if (type == "all") {
-    allData.value.map((data) => {
+    allData.value.map((data: defineData) => {
       if (data.name.toLowerCase().includes(text.toLowerCase())) {
         result.push(data);
       }
